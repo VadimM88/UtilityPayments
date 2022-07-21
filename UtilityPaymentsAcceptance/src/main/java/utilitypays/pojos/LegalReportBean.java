@@ -12,12 +12,12 @@ public class LegalReportBean {
     }
 
     public LegalReportBean(LegalPerson legalPerson, int yearp, int monthp,
-                           List<PayUnit> payPairs, int port) {
+                           List<PayUnit> payUnits, int port) {
         super();
         this.legalPerson = legalPerson;
         this.yearp = yearp;
         this.monthp = monthp;
-        this.payPairs = payPairs;
+        this.payUnits = payUnits;
         this.port = port;
     }
 
@@ -25,7 +25,7 @@ public class LegalReportBean {
     private int port;
     private int yearp;
     private int monthp;
-    private List<PayUnit> payPairs;
+    private List<PayUnit> payUnits;
 
     public LegalPerson getLegalPerson() {
         return legalPerson;
@@ -59,12 +59,12 @@ public class LegalReportBean {
         this.monthp = monthp;
     }
 
-    public List<PayUnit> getPayPairs() {
-        return payPairs;
+    public List<PayUnit> getPayUnits() {
+        return payUnits;
     }
 
-    public void setPayPairs(List<PayUnit> payPairs) {
-        this.payPairs = payPairs;
+    public void setPayUnits(List<PayUnit> payUnits) {
+        this.payUnits = payUnits;
     }
 
 

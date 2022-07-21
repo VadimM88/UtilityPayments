@@ -55,9 +55,13 @@ public class PayService {
         pay.setLegalPerson(legalPerson);
         pay.setPhysicalPerson(physicalPerson);
         pay.setDatePay(new Date());
-        payRepository.save(pay);
+        save(pay);
         debtService.updateDebt(debt, -pay.getSumpay());
         physicalPersonService.updateBalance(physicalPerson, -pay.getSumpay());
         legalPersonService.updateBalance(legalPerson, pay.getSumpay());
+    }
+
+    public void save(Pay pay) {
+        payRepository.save(pay);
     }
 }

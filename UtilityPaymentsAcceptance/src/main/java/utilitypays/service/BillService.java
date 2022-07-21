@@ -46,4 +46,7 @@ public class BillService {
     }
 
 
+    public Bill findBillByPhysicalPersonAndLegalPersonAndYearAndMonth(PhysicalPerson physicalPerson, LegalPerson legalPerson, int yearp, int monthp) {
+        return null;
+    }
 }

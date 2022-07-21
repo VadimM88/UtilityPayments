@@ -1,6 +1,5 @@
 package utilitypays.controllers;
 
-import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +12,6 @@ import utilitypays.service.BillService;
 import utilitypays.service.LegalPersonService;
 import utilitypays.service.PayService;
 import utilitypays.service.PhysicalPersonService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class LegalPersonController{
@@ -35,14 +31,19 @@ public class LegalPersonController{
     @RequestMapping(value = "/billCreation", method = RequestMethod.POST)
     public String billCreation(@ModelAttribute Bill bill, Model model){
         String message;
-        boolean isOk = physicalPerson != null;
-        if (isOk) {
+        boolean physicFound = physicalPerson != null;
+        Bill foundBill = billService.findBillByPhysicalPersonAndLegalPersonAndYearAndMonth(
+                physicalPerson, legalPerson, bill.getYearp(), bill.getMonthp());
+        boolean billExists = foundBill != null;
+        if (physicFound && ! billExists) {
             bill.setPhysicalPerson(physicalPerson);
             bill.setLegalPerson(legalPerson);
             billService.saveBillAndDebt(bill, physicalPerson, legalPerson);
-            message = String.format("Blll on %s rub saved successfully!",
+            message = String.format("Bill on %s rub saved successfully!",
                     bill.getSum());
         }
+        else if (billExists)
+            message = "Bill already exists! Cannot duplicate it";
         else message = "Physical person not found!";
         model.addAttribute("legalPerson", legalPerson);//.getName());
         model.addAttribute("message", message);

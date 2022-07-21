@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Pays for legal person for month</title>
+</head>
+<body>
+<p th:text="'Organization: ' +${Organization}" />
+<p th:text="'Year: ' +${Year}" >
+<p th:text="'Month: ' + ${Month}">
+<table border="1">
+    <tr>
+        <th>Passpnum</th>
+        <th>datePay</th>
+        <th>Sum</th>
+
+    </tr>
+    <tr th:each="pay : ${pays}">
+        <td th:text="${pay.passpnum}">6666 666666</td>
+        <td th:text="${pay.sumpay}">0</td>
+        <td th:text="${pay.date}">1900-01-01</td>
+
+    </tr>
+</table>
+</body>
+</html>

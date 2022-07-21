@@ -94,7 +94,7 @@ public class PhysicalPersonController {
         debt = debtService.getDebtByPhysicalPersonAndLegalPerson(legalPerson, physicalPerson);
         model.addAttribute("sumDebt", legalPerson == null ? 0 : debt.getSumDebt());
         model.addAttribute("pay", new Pay());
-        return "/legalFormPay";
+        return "formPayForLegal";
     }
 
     @RequestMapping(value = "/findPersonDebts", method = RequestMethod.POST)

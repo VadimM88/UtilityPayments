@@ -19,16 +19,13 @@ public class LegalReportBean {
 
     }
 
-    public LegalReportBean(LegalPerson legalPerson, int yearp, int monthp, //int idPhysicalPerson,
-                           List<PayUnit>  payPairs, int port, Date date) {
+    public LegalReportBean(LegalPerson legalPerson, int yearp, int monthp,
+                           List<PayUnit>  payUnits, int port, Date date) {
         super();
         this.legalPerson = legalPerson;
         this.yearp = yearp;
         this.monthp = monthp;
-        this.payPairs = payPairs;
-        //this.idPhysicalPerson = idPhysicalPerson;
-//        this.passpnum = passpnum;
-//        this.sumpay = sumpay;
+        this.payUnits = payUnits;
         this.port = port;
         this.date = date;
     }
@@ -45,7 +42,7 @@ public class LegalReportBean {
 
     @OneToMany
     @JoinColumn(name = "legal_report_id", nullable = false)
-    private List<PayUnit>  payPairs;
+    private List<PayUnit>  payUnits;
 
     public LegalPerson getLegalPerson() {
         return legalPerson;
@@ -79,12 +76,12 @@ public class LegalReportBean {
         this.monthp = monthp;
     }
 
-    public List<PayUnit> getPayPairs() {
-        return payPairs;
+    public List<PayUnit> getPayUnits() {
+        return payUnits;
     }
 
-    public void setPayPairs(List<PayUnit> payPairs) {
-        this.payPairs = payPairs;
+    public void setPayUnits(List<PayUnit> payUnits) {
+        this.payUnits = payUnits;
     }
 
     public int getPort() {

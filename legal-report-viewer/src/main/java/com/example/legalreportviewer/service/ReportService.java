@@ -19,7 +19,7 @@ public class ReportService {
     @Transactional
     public void saveReportAndUnits(LegalReportBean legalReportBean){
         reportRepository.save(legalReportBean);
-        payUnitRepository.saveAll(legalReportBean.getPayPairs());
+        payUnitRepository.saveAll(legalReportBean.getPayUnits());
     }
 
 }
