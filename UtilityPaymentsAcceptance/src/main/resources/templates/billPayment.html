@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BillPayment</title>
+</head>
+<body>
+<form th:action="@{/payTheBill}" th:object="${pay}" method="post">
+    <table border="1" >
+        <tr>
+        <tr style="alignment: center">
+            <td><label th:text="yearp" /></td>
+            <td><input type="number" th:field="*{sumpay}" /></td>
+        </tr>
+<!--        <tr>-->
+<!--            <td><label th:text="monthp" /></td>-->
+<!--            <td><input type="number" th:field="*{monthp}" /></td>-->
+<!--        </tr>-->
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+<p> <a href="/logout" >logout</a> </p>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Balance topup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello! You are on topup page'" />
+<form action="#" th:action="@{/updateBalance}" th:object="${personBalance}" method="post">
+    <!--      th:object="${authenticationData}" method="post" -->
+
+    <table border="1" >
+        <tr>
+            <td><p>Input sum you want to add</p></td>
+            <td><input type="number" th:field="*{balance}" /></td>
+        </tr>
+        <tr>
+            <td><p>Top up balance on this sum </p></td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+<p> <a href="/logout" >logout</a> </p>
+</body>
+</html>

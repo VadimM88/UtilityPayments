@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/reportCreation}" th:object="${bill}" method="post" >
+    <table border="1" >
+        <tr>
+            <td><label th:text="'Enter passport num to find person'" /></td>
+            <td><input type="text" id="inputted" th:field="*{passpnum}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label id="persons" th:text="${fio}" ></label></td>
+            <td><input type="submit" value="find" th:formmethod="post" th:object="${bill}" th:formaction="@{/findPersonByPasspnum}"/></td>
+        </tr>
+        <tr style="alignment: center">
+            <td><label th:text="yearp" /></td>
+            <td><input type="number" th:field="*{yearp}" /></td>
+        </tr>
+
+        <tr>
+            <td><label th:text="monthp" /></td>
+            <td><input type="number" th:field="*{monthp}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="sum" /></td>
+            <td><input type="number" th:field="*{sum}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization page</title>
+</head>
+<body style="alignment: center">
+<p th:text="'Hello, guest!'" data-th-marginheight="center"/>
+<!--<p th:text="'Hello, ' + ${name} + 'bro'" />-->
+<form action="#" th:action="@{/authenticateUser}" th:object="${authenticationData}" method="post" >
+    <table border="1" >
+        <tr style="alignment: center">
+            <td><label th:text="login" /></td>
+            <td><input type="text" th:field="*{login}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="pass" /></td>
+            <td><input type="password" th:field="*{password}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

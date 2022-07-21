@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Debts list</h1>
+<form method="post" th:action="@{/redirectToPayTheBill}">
+<table border="1">
+    <tr>
+        <th>Year</th>
+        <th>Month</th>
+        <th>Sum</th>
+        <th>Legal Person</th>
+        <th>INN</th>
+    </tr>
+    <tr th:each="debt1 : ${debts}">
+        <td th:text="${debt1.yearp}">1900</td>
+        <td th:text="${debt1.monthp}">1</td>
+        <td th:text="${debt1.sumDebt}">0</td>
+        <td th:text="${debt1.legalPerson.getName()}">person not found</td>
+        <td th:text="${debt1.legalPerson.getInn()}">person not found</td>
+
+        <!--        <td> <input type="submit" value="Pay"  th:object="${debt1.get()}" th:formaction="@{/redirectToPayTheBill}"></input>  </td>-->
+    </tr>
+</table>
+</form>
+</body>
+</html>

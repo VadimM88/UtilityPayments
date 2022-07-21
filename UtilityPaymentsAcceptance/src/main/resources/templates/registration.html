@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<form action="#" th:action="@{/registrateUser1}"  method="post" >
+    <table border="1" >
+        <tr style="alignment: center">
+            <td><label th:text="Create login" /></td>
+            <td><input type="text" th:field="${login}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="Create password" /></td>
+            <td><input type="password" th:field="*{password}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register user</title>
+</head>
+<body>
+<form action="#" th:action="@{/registerUser1}"  th:object="${registrationData}"  method="post" >
+    <table border="1" >
+        <tr style="alignment: center">
+            <td><label th:text="'Create login'"></label></td>
+            <td><input type="text" th:field="*{login}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Create password'" /></td>
+            <td><input type="password" th:field="*{password}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Your firstname'" /></td>
+            <td><input type="text" th:field="*{firstname}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Your lastname'" /></td>
+            <td><input type="text" th:field="*{lastname}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Your date of birth'" /></td>
+            <td><input type="date" th:field="*{birthdate}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Your passport number'" /></td>
+            <td><input type="text" th:field="*{passpnum}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

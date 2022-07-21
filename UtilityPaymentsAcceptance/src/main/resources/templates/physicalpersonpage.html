@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <title>Personal page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello, ' + ${physicalPerson.name} + '!'" />
+<p th:text="${message}" >
+
+<form action="#" th:object="${innHolder}" th:action="@{/readdressuser}" method="post">
+<!--      th:object="${authenticationData}" method="post" -->
+
+  <table border="1" >
+    <tr>
+      <td><p th:text="'Your balance is ' + ${physicalPerson.getBalance()} + ' rub'"></td>
+      <td><p> You may <a href = "/topup" > top up balance </a> </p></td>
+    </tr>
+    <tr>
+      <td><p> To find legal person by INN</a> </p></td>
+      <td><p> input it in format 1234567890</a> </p></td>
+    <tr>
+    <tr>
+      <td><input type="text" pattern="[0-9]{10}" th:field="*{inn}"/></td>
+      <td><input type="submit" value="find legal person by INN" th:formmethod="post" th:object="${innHolder}" th:formaction="@{/findLegalPersonByINN}"/></td>
+    <tr>
+      <td><label th:text="'You able also to find all debts'" /></td>
+      <td><input type="submit" value="find all debts" th:formmethod="post" th:formaction="@{/findPersonDebts}"/></td>
+    </tr>
+
+  </table>
+</form>
+<p> <a href="/logout" >logout</a> </p>
+</body>
+</html>
