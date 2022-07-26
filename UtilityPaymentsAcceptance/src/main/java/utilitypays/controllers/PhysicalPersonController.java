@@ -44,7 +44,6 @@ public class PhysicalPersonController {
     @RequestMapping(value = "/updateBalance")
     public String updateBalance(@ModelAttribute PersonBalance personBalance, Model model){
         physicalPersonService.updateBalance(physicalPerson, personBalance.getBalance());
-        System.out.println(this);
         InnHolder value = new InnHolder();
         model.addAttribute("message", "Successfully updated!");
         model.addAttribute("innHolder", value);
@@ -55,7 +54,6 @@ public class PhysicalPersonController {
     @RequestMapping(value = "/topup")
     public String topupBalance(Model model){
         personBalance.setPerson(physicalPerson);
-        System.out.println(this);
         model.addAttribute("physicalPerson", physicalPerson);
         model.addAttribute("personBalance", personBalance);
         return "topup";
@@ -101,7 +99,6 @@ public class PhysicalPersonController {
     public String findPersonDebts(Model model){
         List<Debt> allPhysicalPersonDebts = debtService.findLastPhysicalPersonDebts(physicalPerson);
         model.addAttribute("debts", allPhysicalPersonDebts);
-        //debt.
         return "allPhysicalPersonDebts";
     }
 

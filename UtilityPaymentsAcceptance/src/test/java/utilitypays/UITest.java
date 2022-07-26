@@ -5,23 +5,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
-public class SimpleTest  extends BaseTest {
+public class UITest extends BaseTest {
 
     @Test
-    public void testPhysicalPersonUI() throws IOException {
+    public void testPhysicalPersonUI() {
 
         driver.get("http://localhost:8080/");
 

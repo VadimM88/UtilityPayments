@@ -1,44 +1,111 @@
 package utilitypays;
 
 import org.junit.*;
-//import org.junit.Before;
-//import org.junit.BeforeClass;
-//import org.junit.runner.OrderWith;
+
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-//import org.mockito.Mock;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import utilitypays.entity.*;
 import utilitypays.service.*;
-
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
-import static org.junit.Assume.assumeTrue;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
-//@RunWith(Suite.class)
-
 public class UtilityPaysUnitTest {
 
     @Autowired
-    LegalPersonBusinessTypeService businessTypeService;// = ctx.getBean(LegalPersonBusinessTypeService.class);
+    LegalPersonBusinessTypeService businessTypeService;
     @Autowired
-    LegalPersonBusinessType water;// = ctx.getBean(LegalPersonBusinessType.class);
-//    @Mock
-//    private LegalPersonBusinessType water2;
+    LegalPersonBusinessType water;
+
 
     @Autowired
-    LegalPersonBusinessType energy;// = ctx.getBean(LegalPersonBusinessType.class);
-    //    @Mock
-//    private LegalPersonBusinessType energy2;
+    LegalPersonBusinessType energy;
+
     @Autowired
-    LegalPersonBusinessType gas;// = ctx.getBean(LegalPersonBusinessType.class);
+    LegalPersonBusinessType gas;
+
+
+
+    @Autowired
+    PhysicalPersonService physicalPersonService;
+    @Autowired
+    PhysicalPerson physic;
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    Account acc;
+
+
+    @Autowired
+    CostHistoryService costHistoryService;
+    @Autowired
+    CostHistory costHistoryWater;
+
+    @Autowired
+    CostHistory costHistoryGas;
+
+    @Autowired
+    CostHistory costHistoryEnergy;
+    @Autowired
+    LegalPerson lp;
+
+    @Autowired
+    LegalPersonService lps;
+    @Autowired
+    Account accLegal;
+    @Autowired
+    LegalPerson lp2;
+    @Autowired
+    Account accLegal2;
+    @Autowired
+    DebtService debtService;
+    @Autowired
+    Debt debt;
+    @Autowired
+    Debt debt2;
+    @Autowired
+    Debt debt3;
+    @Autowired
+    Debt debt4;
+
+
+    @Rule
+    public TestName testName = new TestName();
+
+    @Before //создание некоторых записей в таблицах для проведения определенных тестов
+    public void setUp() {
+        String methodName = testName.getMethodName();
+        boolean needAddBt = methodName.equals("costHistoryCreatingTest") || methodName.equals("legalPersonsCreatingTest");
+        boolean needAddPersons =  methodName.equals("accountsTest") || methodName.equals("debtsTest");
+        if(!needAddBt &&  !needAddPersons)
+            return;
+        businessTypesCreatingTest();
+
+        if(!needAddPersons)
+            return;
+        physicsTesting();
+        legalPersonsCreatingTest();
+
+    }
+
+    @After
+    public void clear(){
+        accountService.clear();
+        debtService.clear();
+        costHistoryService.clear();
+        lps.clear();
+        physicalPersonService.clear();
+        businessTypeService.clear();
+    }
+
 
     @Test
     public synchronized void businessTypesCreatingTest() {
@@ -55,115 +122,7 @@ public class UtilityPaysUnitTest {
         energy.setBusinessType("Energy");
         energy.setUnit("kilowatt");
         businessTypeService.save(energy);
-        Assert.assertTrue(businessTypeService.count() == 3);
-    }
-
-    @Autowired
-    PhysicalPersonService physicalPersonService;// = ctx.getBean(PhysicalPersonService.class);
-    @Autowired
-    PhysicalPerson physic;// = ctx.getBean(PhysicalPerson.class);
-    @Autowired
-    AccountService accountService;// = ctx.getBean(AccountService.class);
-
-    @Autowired
-    Account acc;// = ctx.getBean(Account.class);
-//    @Autowired
-//    LegalPersonBusinessTypeService businessTypeService;// = ctx.getBean(LegalPersonBusinessTypeService.class);
-//    @Autowired
-//    LegalPersonBusinessType water;// = ctx.getBean(LegalPersonBusinessType.class);
-////    @Mock
-////    private LegalPersonBusinessType water2;
-//
-//    @Autowired
-//    LegalPersonBusinessType energy;// = ctx.getBean(LegalPersonBusinessType.class);
-////    @Mock
-////    private LegalPersonBusinessType energy2;
-//    @Autowired
-//    LegalPersonBusinessType gas;// = ctx.getBean(LegalPersonBusinessType.class);
-
-    @Autowired
-    CostHistoryService costHistoryService;// = ctx.getBean(CostHistoryService.class);
-    @Autowired
-    CostHistory costHistoryWater;// = ctx.getBean(CostHistory.class);
-
-    @Autowired
-    CostHistory costHistoryGas;// = ctx.getBean(CostHistory.class);
-
-    @Autowired
-    CostHistory costHistoryEnergy;// = ctx.getBean(CostHistory.class);
-    @Autowired
-    LegalPerson lp;// = ctx.getBean(LegalPerson.class);
-
-    @Autowired
-    LegalPersonService lps;// = ctx.getBean(LegalPersonService.class);
-    @Autowired
-    Account accLegal;// = ctx.getBean(Account.class);
-    @Autowired
-    LegalPerson lp2;// = ctx.getBean(LegalPerson.class);
-    @Autowired
-    Account accLegal2;// = ctx.getBean(Account.class);
-    @Autowired
-    DebtService debtService;// = ctx.getBean(DebtService.class);
-    @Autowired
-    Debt debt;// = ctx.getBean(Debt.class);
-    @Autowired
-    Debt debt2 ;//= ctx.getBean(Debt.class);
-    @Autowired
-    Debt debt3;// = ctx.getBean(Debt.class);
-    @Autowired
-    Debt debt4;// = ctx.getBean(Debt.class);
-
-//    @Test
-//    public void beansTesting() throws NoSuchAlgorithmException {
-//
-//        physicsTesting();
-//
-//        businessTypesCreatingTest();
-//
-//        costHistoryCreatingTest();
-//
-//        legalPersonsCreatingTest();
-//
-//        accountsTest();
-//
-//        debtsTest();
-//    }
-
-
-//    public void prepareBeans(){
-//        businessTypesCreatingTest();
-//    }
-    //@BeforeEach
-
-    @Rule
-    public TestName testName = new TestName();
-
-    @Before
-    public void setUp() throws InterruptedException {
-        String methodName = testName.getMethodName();
-        boolean needAddBt = methodName.equals("costHistoryCreatingTest") || methodName.equals("legalPersonsCreatingTest");
-        boolean needAddPersons =  methodName.equals("accountsTest") || methodName.equals("debtsTest");
-        if(!needAddBt &&  !needAddPersons)
-            return;
-//        costHistoryCreatingTest();
-//        legalPersonsCreatingTest();
-        businessTypesCreatingTest();
-
-        if(!needAddPersons)
-            return;
-        physicsTesting();
-        legalPersonsCreatingTest();
-        // setup follows
-    }
-
-    @After
-    public void clear(){
-        accountService.clear();
-        debtService.clear();
-        costHistoryService.clear();
-        lps.clear();
-        physicalPersonService.clear();
-        businessTypeService.clear();
+        Assert.assertEquals(3, businessTypeService.count());
     }
 
     @Test
@@ -184,8 +143,8 @@ public class UtilityPaysUnitTest {
         costHistoryEnergy.setYear(2020);
         costHistoryEnergy.setCost(510);
         costHistoryService.save(costHistoryEnergy);
-        Assert.assertTrue(costHistoryService.count() == 3);
-//        businessTypeService.clear();
+        Assert.assertEquals(3, costHistoryService.count());
+
     }
 
     @Test
@@ -198,16 +157,12 @@ public class UtilityPaysUnitTest {
         physic.setBirthdate(calendar.getTime());
         physic.setPasspnum("6002 22 56");
         physicalPersonService.save(physic);
-        Assert.assertTrue(physicalPersonService.count() == 1);
+        Assert.assertEquals(1, physicalPersonService.count());
     }
 
     @Test
-    public void legalPersonsCreatingTest() throws InterruptedException {
-        //businessTypesCreatingTest();
-//        if (water.getId()==null)
-//            water = water2;
-//        if(energy.getId()==null)
-//            energy = energy2;
+    public void legalPersonsCreatingTest() {
+
         lp.setName("AO Vodokanal");
         lp.setBalance(5000000);
         lp.setInn("99999999");
@@ -220,8 +175,8 @@ public class UtilityPaysUnitTest {
         lp2.setInn("66666666");
         lp2.setBusinessType(energy);
         lps.save(lp2);
-        Assert.assertTrue(lps.count() == 2);
-//        lps.clear();
+        Assert.assertEquals(2, lps.count());
+
     }
 
 
@@ -245,7 +200,7 @@ public class UtilityPaysUnitTest {
         accLegal2.setPassword(accountService.getHashWithSalt(accLegal2.getLogin() + "Uassia1!", accLegal2.getSalt()));
         accLegal2.setLegalPerson(lp2);
         accountService.save(accLegal2);
-        Assert.assertTrue(accountService.count() == 3);
+        Assert.assertEquals(3, accountService.count());
     }
 
     @Test
@@ -280,6 +235,6 @@ public class UtilityPaysUnitTest {
         debt4.setMonthp(2);
         debt4.setSumDebt(5000);
         debtService.save(debt4);
-        Assert.assertTrue(debtService.count() == 4);
+        Assert.assertEquals(4, debtService.count());
     }
 }

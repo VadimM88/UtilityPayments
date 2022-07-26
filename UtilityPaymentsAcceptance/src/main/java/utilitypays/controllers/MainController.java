@@ -54,7 +54,6 @@ public class MainController {
         Optional<Account> first = byLogin.stream().findFirst();
         if (first.isEmpty())
             return new ResponseEntity<>("User is not found", HttpStatus.NOT_FOUND);
-        //InnHolder innHolder = null;
         PhysicalPerson physicalPerson;
         LegalPerson legalPerson;
         Account account = first.get();
@@ -76,7 +75,6 @@ public class MainController {
             }
             else {
                 legalPerson = (LegalPerson) person;
-                //this.legalPerson = legalPerson;
                 legalPersonController = configurableApplicationContext.getBean(LegalPersonController.class);
                 legalPersonController.setLegalPerson(legalPerson);
                 model.addAttribute("legalPerson", legalPerson);

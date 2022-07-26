@@ -1,20 +1,18 @@
 package com.example.legalreportviewer;
 
-//import org.junit.runner.RunWith;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.CollectionCondition.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.io.IOException;
 
+//import com.codeborne.selenide.Selenide.*;
 //@RunWith(SpringRunner.class)
 //@SpringBootTest()
 public class UITest extends BaseTest {
@@ -39,10 +37,24 @@ public class UITest extends BaseTest {
         inputSumpay.sendKeys("555");
         inputSumpay.sendKeys(Keys.ENTER);
 
-        WebElement topic = driver.findElement(By.xpath("//p[contains(text(),'Your balance is 555')]"));
+        WebElement topic = driver.findElement(By.xpath("//p[contains(text(),'Your balance is ')]"));
         Assert.assertTrue(topic.isDisplayed());
-
     }
 
+    @Test
+    public void legalPersonUISelenideTest(){
+        open("/");
+        $(By.linkText("authorization")).click();
+        $(By.name("login")).setValue("gaz");
+        $(By.name("password")).setValue("Uassia1!");
+        $(By.name("password")).pressEnter();
+        $(By.linkText("create bill to physical person")).click();
+        $(By.name("yearp")).setValue("2022");
+        $(By.name("monthp")).setValue("7");
+        $(By.name("quantity")).setValue("7");
+        $(By.name("passpnum")).setValue("6002 223344").pressEnter();
+        $(By.name("submit")).click();
+        $(By.name("message")).shouldHave(text("Bill on 48 rub saved successfully!"));
+    }
 }
 
