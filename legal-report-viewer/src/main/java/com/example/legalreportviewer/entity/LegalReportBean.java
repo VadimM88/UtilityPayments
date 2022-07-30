@@ -40,8 +40,8 @@ public class LegalReportBean {
     private Date date;
     private int port;
 
-    @OneToMany
-    @JoinColumn(name = "legal_report_id", nullable = false)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "legal_report_id", nullable = false )
     private List<PayUnit>  payUnits;
 
     public LegalPerson getLegalPerson() {

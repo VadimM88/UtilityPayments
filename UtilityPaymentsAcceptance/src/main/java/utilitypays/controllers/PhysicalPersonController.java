@@ -40,7 +40,7 @@ public class PhysicalPersonController {
         this.physicalPerson = physicalPerson;
     }
 
-
+    //пополнение баланса физлица
     @RequestMapping(value = "/updateBalance")
     public String updateBalance(@ModelAttribute PersonBalance personBalance, Model model){
         physicalPersonService.updateBalance(physicalPerson, personBalance.getBalance());
@@ -51,6 +51,7 @@ public class PhysicalPersonController {
         return "physicalpersonpage";
     }
 
+    // переход на страницу пополнения баланса
     @RequestMapping(value = "/topup")
     public String topupBalance(Model model){
         personBalance.setPerson(physicalPerson);
@@ -58,6 +59,7 @@ public class PhysicalPersonController {
         model.addAttribute("personBalance", personBalance);
         return "topup";
     }
+
 
     @RequestMapping(value = "/redirectToPayTheBill", method = RequestMethod.POST)
     public String redirectToPayTheBill(@ModelAttribute Pay pay, /*@ModelAttribute Debt debt1,*/ Model model){
@@ -77,24 +79,20 @@ public class PhysicalPersonController {
         return "physicalpersonpage";
     }
 
-    @RequestMapping(value = "/payTheBill", method = RequestMethod.POST)
-    public String payTheBill(@ModelAttribute Pay pay, Model model){
-        model.addAttribute("name", physicalPerson.getName());
-        model.addAttribute("inn", "");
-        model.addAttribute("balance", physicalPerson.getBalance());
-        return "physicalpersonpage";
-    }
-
+    //поиск организации по ИНН и переход к оплате
     @RequestMapping(value = "/findLegalPersonByINN", method = RequestMethod.POST)
     public String legalPersonByINNReaddressing(@ModelAttribute InnHolder innHolder, Model model){
         legalPerson = legalPersonService.findByINN(innHolder.getInn());
-        model.addAttribute("legalName", legalPerson == null ? "service provider not found" : legalPerson.getName());
+        boolean legalFound = legalPerson != null;
+        model.addAttribute("legalFound", legalFound);
+        model.addAttribute("legalName", legalFound ? legalPerson.getName() : "Not found. Please verify INN code!");
         debt = debtService.getDebtByPhysicalPersonAndLegalPerson(legalPerson, physicalPerson);
-        model.addAttribute("sumDebt", legalPerson == null ? 0 : debt.getSumDebt());
+        model.addAttribute("sumDebt", legalFound ? debt.getSumDebt() : 0);
         model.addAttribute("pay", new Pay());
         return "formPayForLegal";
     }
 
+    // отчёт по всем задолженностям физлица
     @RequestMapping(value = "/findPersonDebts", method = RequestMethod.POST)
     public String findPersonDebts(Model model){
         List<Debt> allPhysicalPersonDebts = debtService.findLastPhysicalPersonDebts(physicalPerson);

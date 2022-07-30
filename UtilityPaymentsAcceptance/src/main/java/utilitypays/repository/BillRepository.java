@@ -14,5 +14,7 @@ public interface BillRepository  extends JpaRepository<Bill, Integer> {
 
     //List<Bill> findAllBySumdutyGreaterThanAndPhysicalPerson(Long i, PhysicalPerson p);
 
-    Bill findBillByPhysicalPersonAndLegalPerson(PhysicalPerson physicalPerson, LegalPerson legalPerson);
+    Bill findBillByPhysicalPersonAndLegalPersonAndYearpAndMonthp(PhysicalPerson physicalPerson, LegalPerson legalPerson, int year, int month);
+
+
 }

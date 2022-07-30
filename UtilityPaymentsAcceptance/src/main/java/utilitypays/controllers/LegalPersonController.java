@@ -28,6 +28,7 @@ public class LegalPersonController{
     BillService billService;
 
 
+    //сохраняем данные в bill, если такого не было за этот период, и возвращаемся на остновную страницу legal
     @RequestMapping(value = "/billCreation", method = RequestMethod.POST)
     public String billCreation(@ModelAttribute Bill bill, Model model){
         String message;
@@ -50,6 +51,7 @@ public class LegalPersonController{
         return "legalPersonPage";
     }
 
+    //по нажатию кнопки find ищем физлицо по паспорту и передаем ФИО во вью
     @RequestMapping(value = "/findPersonByPasspnum", method = RequestMethod.POST)
     public String physicalPersonByPassportNumReaddressing(@ModelAttribute Bill bill, Model model){
         physicalPerson = physicalPersonService.findByPasspnum(bill.getPasspnum());
@@ -59,6 +61,7 @@ public class LegalPersonController{
         return "createBill";
     }
 
+    //переход на страницу создания счёта
     @RequestMapping(value = "/createBill")
     public String createBill(Model model){
         bill = new Bill();

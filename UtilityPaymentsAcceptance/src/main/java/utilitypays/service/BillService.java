@@ -2,13 +2,14 @@ package utilitypays.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import utilitypays.entity.Bill;
 import utilitypays.entity.CostHistory;
 import utilitypays.entity.LegalPerson;
 import utilitypays.entity.PhysicalPerson;
 import utilitypays.repository.BillRepository;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 
 @Service
 public class BillService {
@@ -27,10 +28,6 @@ public class BillService {
         billRepository.save(bill);
     }
 
-    public Bill findBillByPhysicalPersonAndLegalPerson(PhysicalPerson physicalPerson, LegalPerson legalPerson){
-        return billRepository.findBillByPhysicalPersonAndLegalPerson(physicalPerson, legalPerson);
-    }
-
     public long count(){
         return billRepository.count();
     }
@@ -47,6 +44,6 @@ public class BillService {
 
 
     public Bill findBillByPhysicalPersonAndLegalPersonAndYearAndMonth(PhysicalPerson physicalPerson, LegalPerson legalPerson, int yearp, int monthp) {
-        return null;
+        return billRepository.findBillByPhysicalPersonAndLegalPersonAndYearpAndMonthp(physicalPerson, legalPerson, yearp, monthp);
     }
 }

@@ -2,13 +2,12 @@ package utilitypays.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import utilitypays.entity.Debt;
 import utilitypays.entity.LegalPerson;
 import utilitypays.entity.Pay;
 import utilitypays.entity.PhysicalPerson;
 import utilitypays.repository.PayRepository;
-
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
@@ -40,10 +39,7 @@ public class PayService {
         Date finish = Date.from(localFinish.atStartOfDay(ZoneId.systemDefault()).toInstant());
         List<Pay> pays = payRepository.findAllByLegalPersonAndDatePayBetween(lp, start, finish);
         List<Pay> defpays = new ArrayList<>();
-//        Pay defpay = new Pay();
-//        defpay.setSumpay(10000);
-//        defpay.setDatePay(new Date());
-//        defpays.add(defpay);
+
         return pays == null ? defpays : pays;
     }
 

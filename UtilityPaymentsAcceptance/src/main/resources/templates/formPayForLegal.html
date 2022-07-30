@@ -6,22 +6,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p>This is form legal pay!</p>
-<p th:text="'Organization name: ' + ${legalName}"></p>
-<p th:text="'Yor debt to this organization: ' + ${sumDebt}"></p>
-<p>Enter sum you'd like to pay</p>
-<form th:action="@{/redirectToPayTheBill}" th:object="${pay}" method="post">
-    <table border="1" >
-        <tr>
-        <tr style="alignment: center">
-            <td><label th:text="sumpay" /></td>
-            <td><input type="number" min="1" maxlength="8" th:field="*{sumpay}" /></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Submit" /></td>
-        </tr>
-    </table>
-</form>
+<p>This is form pay for legal person!</p>
+<p th:text="'Organization: ' + ${legalName}"></p>
+<div th:if="${legalFound}" >
+    <p th:text="'Yor debt to this organization: ' + ${sumDebt}"></p>
+    <p>Enter sum you'd like to pay</p>
+    <form th:action="@{/redirectToPayTheBill}" th:object="${pay}" method="post">
+        <table border="1" >
+            <tr>
+            <tr style="alignment: center">
+                <td><label th:text="sumpay" /></td>
+                <td><input type="number" min="1" maxlength="8" th:field="*{sumpay}" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
 <p> <a href="/logout" >logout</a> </p>
 </body>
 </html>

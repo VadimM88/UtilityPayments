@@ -5,20 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.CollectionCondition.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.io.IOException;
 
-//import com.codeborne.selenide.Selenide.*;
-//@RunWith(SpringRunner.class)
 //@SpringBootTest()
 public class UITest extends BaseTest {
 
     @Test
-    public void testPhysicalPersonUI() throws IOException {
+    public void testPhysicalPersonUI(){
 
         driver.get("http://localhost:8080/");
         driver.findElement(By.linkText("authorization")).click();
