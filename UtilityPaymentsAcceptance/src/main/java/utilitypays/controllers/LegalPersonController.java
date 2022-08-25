@@ -1,6 +1,6 @@
 package utilitypays.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +18,21 @@ public class LegalPersonController{
     PhysicalPerson physicalPerson;
     LegalPerson legalPerson;
     Bill bill;
-    @Autowired
+    final
     PhysicalPersonService physicalPersonService;
-    @Autowired
+    final
     LegalPersonService legalPersonService;
-    @Autowired
+    final
     PayService payService;
-    @Autowired
+    final
     BillService billService;
+
+    public LegalPersonController(PhysicalPersonService physicalPersonService, LegalPersonService legalPersonService, PayService payService, BillService billService) {
+        this.physicalPersonService = physicalPersonService;
+        this.legalPersonService = legalPersonService;
+        this.payService = payService;
+        this.billService = billService;
+    }
 
 
     //сохраняем данные в bill, если такого не было за этот период, и возвращаемся на остновную страницу legal

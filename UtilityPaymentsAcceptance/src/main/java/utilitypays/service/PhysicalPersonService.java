@@ -25,7 +25,7 @@ public class PhysicalPersonService {
   }
 
   public PhysicalPerson findById(Integer id){
-      return repository.findById(id).get();
+      return repository.findById(id).orElse(null);
   }
     public PhysicalPerson createPhysicalPersonOnRegistrationData(AuthenticationData registrationData) {
         PhysicalPerson physicalPerson = new PhysicalPerson();

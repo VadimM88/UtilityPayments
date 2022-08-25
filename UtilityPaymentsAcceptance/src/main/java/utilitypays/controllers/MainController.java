@@ -21,12 +21,15 @@ import java.util.Optional;
 public class MainController {
     private final AuthenticationData authenticationData = new AuthenticationData();
     private final AuthenticationData registrationData = new AuthenticationData();
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ConfigurableApplicationContext configurableApplicationContext;
+    private final AccountService accountService;
+    private final ConfigurableApplicationContext configurableApplicationContext;
 
-   // private Account account = new Account();
+    public MainController(AccountService accountService, ConfigurableApplicationContext configurableApplicationContext) {
+        this.accountService = accountService;
+        this.configurableApplicationContext = configurableApplicationContext;
+    }
+
+    // private Account account = new Account();
 
     @RequestMapping(value = "/authorization")
     public String authorizationController(Model model) {

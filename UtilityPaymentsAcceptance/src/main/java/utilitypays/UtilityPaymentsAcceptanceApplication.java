@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class Main {
+public class UtilityPaymentsAcceptanceApplication {
     public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext ctx = SpringApplication.run(Main.class);
+        ConfigurableApplicationContext ctx = SpringApplication.run(UtilityPaymentsAcceptanceApplication.class);
         //FillData.fillTestData(ctx);
 
 

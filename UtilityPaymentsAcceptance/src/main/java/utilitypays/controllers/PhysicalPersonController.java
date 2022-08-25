@@ -1,6 +1,6 @@
 package utilitypays.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,19 +21,22 @@ import java.util.List;
 @Controller
 @Component
 public class PhysicalPersonController {
-    @Autowired
-    PhysicalPersonService physicalPersonService;
-    @Autowired
-    private PayService payService;
-    @Autowired
-    private LegalPersonService legalPersonService;
-    @Autowired
-    private DebtService debtService;
+    private final PhysicalPersonService physicalPersonService;
+    private final PayService payService;
+    private final LegalPersonService legalPersonService;
+    private final DebtService debtService;
 
     private PhysicalPerson physicalPerson;
     private LegalPerson legalPerson;
     private Debt debt;
     private final PersonBalance personBalance = new PersonBalance();
+
+    public PhysicalPersonController(PhysicalPersonService physicalPersonService, PayService payService, LegalPersonService legalPersonService, DebtService debtService) {
+        this.physicalPersonService = physicalPersonService;
+        this.payService = payService;
+        this.legalPersonService = legalPersonService;
+        this.debtService = debtService;
+    }
 
 
     public void setPhysicalPerson(PhysicalPerson physicalPerson) {

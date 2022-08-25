@@ -55,7 +55,7 @@ public class AccountService {
 
     public byte[] generateSalt() {
         SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
+        byte[] bytes = new byte[20];
         random.nextBytes(bytes);
         return bytes;
     }
@@ -71,8 +71,7 @@ public class AccountService {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         digest.reset();
         digest.update(salt);
-        byte[] hashedBytes = digest.digest(stringToBytes(input));
-        return hashedBytes;
+        return digest.digest(stringToBytes(input));
     }
     public byte[] stringToBytes(String input) {
         if (Base64.isBase64(input)) {

@@ -1,6 +1,6 @@
 package utilitypays.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +18,16 @@ import java.util.List;
 @RestController
 public class LegalReportController {
 
-    @Autowired
+    final
     LegalPersonService legalPersonService;
-    @Autowired
-    private Environment environment;
-    @Autowired
-    PayService payService;
+    private final Environment environment;
+    private final PayService payService;
+
+    public LegalReportController(LegalPersonService legalPersonService, Environment environment, PayService payService) {
+        this.legalPersonService = legalPersonService;
+        this.environment = environment;
+        this.payService = payService;
+    }
 
     @GetMapping("/get-report/from/{legalInn}/year/{year}/month/{month}")
     public LegalReportBean retrieveValue
