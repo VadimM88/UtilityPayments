@@ -14,11 +14,15 @@ import java.util.Optional;
 
 @Service
 public class ReportService {
-    @Autowired
-    ReportRepository reportRepository;
+    final ReportRepository reportRepository;
+
+    final PayUnitRepository payUnitRepository;
 
     @Autowired
-    PayUnitRepository payUnitRepository;
+    public ReportService(ReportRepository reportRepository, PayUnitRepository payUnitRepository) {
+        this.reportRepository = reportRepository;
+        this.payUnitRepository = payUnitRepository;
+    }
 
     @Transactional
     public void saveReportAndUnits(LegalReportBean legalReportBean){

@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Scope("prototype")
-@Component
+@Component//иначе бины не видит почему-то
 @Table(name = "physical_persons")
 public class PhysicalPerson  implements Person {
     @Id

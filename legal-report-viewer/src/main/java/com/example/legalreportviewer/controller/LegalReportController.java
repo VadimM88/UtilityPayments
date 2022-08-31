@@ -9,6 +9,7 @@ import com.example.legalreportviewer.service.LegalPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -36,7 +37,8 @@ public class LegalReportController {
                                  ReportStorage reportStorage) {
         this.legalPersonService = legalPersonService;
         this.reportStorage = reportStorage;
-        isStorageCaching = reportStorage.getClass().isAnnotationPresent(Caching.class);
+        //ClassUtils.getUserClass() определит реальный класс reportStorage, а не его проксю.
+        isStorageCaching = ClassUtils.getUserClass(reportStorage).isAnnotationPresent(Caching.class);
         if (isStorageCaching)
             reportStorage.getSetFromBase();
         else
@@ -73,9 +75,9 @@ public class LegalReportController {
         LegalReportBean legalReportBean = new LegalReportBean(legalPerson, year, month,
                 payUnits, response.getPort(), response.getDate());
 
-        reportStorage.add(legalReportBean);
-        if (isStorageCaching)
-            reportStorage.writeReport(legalReportBean);
+        reportStorage.add(legalReportBean, isStorageCaching);
+//        if (isStorageCaching)
+//            reportStorage.writeReport(legalReportBean);
         model.addAttribute("Organization", legalPerson == null ?
                         "not found" : legalPerson.getName());
         model.addAttribute("Year", year);

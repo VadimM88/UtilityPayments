@@ -3,18 +3,19 @@ package com.example.legalreportviewer;
 import com.example.legalreportviewer.entity.LegalReportBean;
 import com.example.legalreportviewer.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Component
+@Repository
 @Caching
 public class ReportStorage {
     private Set<LegalReportBean> set;
 
     private final ReportService reportService;
 
-    public ReportStorage(@Autowired ReportService reportService) {
+    @Autowired
+    public ReportStorage(ReportService reportService) {
         this.reportService = reportService;
     }
 
@@ -32,7 +33,7 @@ public class ReportStorage {
         return first.isEmpty() ? null : first.get();
     }
 
-    public void add(LegalReportBean legalReportBean){
+    public void add(LegalReportBean legalReportBean, boolean isStorageCaching){
         set.add(legalReportBean);
     }
 

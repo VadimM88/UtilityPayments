@@ -23,7 +23,7 @@ import javax.persistence.*;
     @JoinColumn(name = "physical_person_id", unique = true)
     private PhysicalPerson physicalPerson;
 
-    @ManyToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "legal_person_id", unique = true)
     private LegalPerson legalPerson;
 
@@ -52,8 +52,9 @@ import javax.persistence.*;
     }
 
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     public String login;
+    @Column(nullable = false)
     private byte[] password;
     private byte[] salt;
 

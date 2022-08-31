@@ -35,7 +35,7 @@ public class LegalPersonController{
     }
 
 
-    //сохраняем данные в bill, если такого не было за этот период, и возвращаемся на остновную страницу legal
+    //сохраняем данные в bill, если такого не было за этот период, и возвращаемся на основную страницу legal
     @RequestMapping(value = "/billCreation", method = RequestMethod.POST)
     public String billCreation(@ModelAttribute Bill bill, Model model){
         String message;
